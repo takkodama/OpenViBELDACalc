@@ -1,4 +1,4 @@
-function [z_AllDuration, d_AllDuration, b, b_0] = LDAmatlab_SSVEP(TrainTargetCSV, TrainNonTargetCSV, InputCSV) 
+function [z_AllDuration, d_AllDuration, b_coef] = LDAmatlab_SSVEP(TrainTargetCSV, TrainNonTargetCSV, InputCSV) 
 
 [TrainNonTarget] = fileProcessor(TrainNonTargetCSV);
 [TrainTarget] = fileProcessor(TrainTargetCSV);
@@ -26,7 +26,7 @@ f = @(x1,x2) b_0 + b(1)*x1 + b(2)*x2;
 
 % === Hyperplane 
 % b(1) * x1 + b(2) + *x2 + b_0 = 0
-b = [b(1) b(2) b_0];
+b_coef = [b_0 b(1) b(2)];
 
 % ===  % ===  % ===  2. Check classifier  % ===  % ===  % === 
 
