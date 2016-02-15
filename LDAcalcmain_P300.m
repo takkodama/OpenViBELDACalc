@@ -5,17 +5,25 @@ function LDAcalcmain_P300(directory_Training, directory_Trial)
 [TargetB] = fileProcessor_dir(directory_Training, dir(['./', directory_Training, horzcat('/[5] P300-classifierInput_TargetB*.csv')]));
 
 %Trial Files
-[TrialA1] = fileProcessor_dir(directory_Trial, dir(['./', directory_Trial, horzcat('/[6] P300-classifierTest_TargetA(1)(0.1-0.3)*.csv')]));
-[TrialA2] = fileProcessor_dir(directory_Trial, dir(['./', directory_Trial, horzcat('/[6] P300-classifierTest_TargetA(2)(0.1-0.3)*.csv')]));
-[TrialB3] = fileProcessor_dir(directory_Trial, dir(['./', directory_Trial, horzcat('/[6] P300-classifierTest_TargetB(3)(0.1-0.3)*.csv')]));
-[TrialB4] = fileProcessor_dir(directory_Trial, dir(['./', directory_Trial, horzcat('/[6] P300-classifierTest_TargetB(4)(0.1-0.3)*.csv')]));
+[Trial2clsA] = fileProcessor_dir(directory_Trial, dir(['./', directory_Trial, horzcat('/[6] P300-classifierTrial_TargetA(0.1-0.3)*.csv')]));
+[Trial2clsB] = fileProcessor_dir(directory_Trial, dir(['./', directory_Trial, horzcat('/[6] P300-classifierTrial_TargetB(0.1-0.3)*.csv')]));
+%{
+[Trial4cls1] = fileProcessor_dir(directory_Trial, dir(['./', directory_Trial, horzcat('/[6] P300-classifierTrial_Label1(0.1-0.3)*.csv')]));
+[Trial4cls2] = fileProcessor_dir(directory_Trial, dir(['./', directory_Trial, horzcat('/[6] P300-classifierTrial_Label2(0.1-0.3)*.csv')]));
+[Trial4cls3] = fileProcessor_dir(directory_Trial, dir(['./', directory_Trial, horzcat('/[6] P300-classifierTrial_Label3(0.1-0.3)*.csv')]));
+[Trial4cls4] = fileProcessor_dir(directory_Trial, dir(['./', directory_Trial, horzcat('/[6] P300-classifierTrial_Label4(0.1-0.3)*.csv')]));
+%}
 
-[z_A1, d_A1, p_targetA1, b_coef_A1] = LDAfuncex_P300(TargetA, TargetB, TrialA1);
-[z_B2, d_B2, p_targetA2, b_coef_B2] = LDAfuncex_P300(TargetA, TargetB, TrialA2);
-[z_A3, d_A3, p_targetB3, b_coef_A3] = LDAfuncex_P300(TargetA, TargetB, TrialB3);
-[z_B4, d_B4, p_targetB4, b_coef_B4] = LDAfuncex_P300(TargetA, TargetB, TrialB4);
+[z_A, d_A, p_targetA, b_coef_A] = LDAfuncex_P300(TargetA, TargetB, Trial2clsA);
+[z_B, d_B, p_targetB, b_coef_B] = LDAfuncex_P300(TargetA, TargetB, Trial2clsB);
+%{
+[z_1, d_1, p_target1, b_coef_1] = LDAfuncex_SSVEP(TargetA, TargetB, Trial4cls1);
+[z_2, d_2, p_target2, b_coef_2] = LDAfuncex_SSVEP(TargetA, TargetB, Trial4cls2);
+[z_3, d_3, p_target3, b_coef_3] = LDAfuncex_SSVEP(TargetA, TargetB, Trial4cls3);
+[z_4, d_4, p_target4, b_coef_4] = LDAfuncex_SSVEP(TargetA, TargetB, Trial4cls4);
+%}
 
-ProbP300_4cls = horzcat(p_targetA1(:,2), p_targetA2(:,2), p_targetB3(:,2), p_targetB4(:,2));
+%ProbP300_2cls = horzcat(p_targetA(:,2), p_targetB(:,2));
 
 %{
 figure
