@@ -1,4 +1,4 @@
-function LDAcalcmain_SSVEP(directory_Training, directory_Trial)
+function [ProbSSVEP_2cls] = LDAcalcmain_SSVEP(directory_Training, directory_Trial)
 
 %Training Files
 [Target1] = fileProcessor_dir(directory_Training, dir(['./', directory_Training, horzcat('/[4] SSVEP-classifierInput_Target1*.csv')]));
@@ -30,6 +30,12 @@ ProbSSVEP_4cls = horzcat(p_target1(:,2), p_target2(:,2), p_target3(:,2), p_targe
 ProbSSVEP_2cls = horzcat((p_targetA1(:,2)+p_targetA3(:,2))/2,(p_targetB2(:,2)+p_targetB4(:,2))/2,...
                        (p_targetA1(:,2)+p_targetA3(:,2))/2,(p_targetB2(:,2)+p_targetB4(:,2))/2);
 
+%____________|_ Probability A _|_ Probability B _|
+% Duration 1 | Correct         | Wrong
+% Duration 2 | Wrong           | Correct
+% Duration 3 | Correct         | Wrong
+% Duration 4 | Wrong           | Correct
+                   
 figure
 for i = 1:4
     ProbAll = vertcat(ProbSSVEP_4cls(i,:), ProbSSVEP_2cls(i,:));
