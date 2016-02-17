@@ -33,6 +33,4 @@ for j = 1:(size(p, 2))
     end
 end
 
-
-
 end

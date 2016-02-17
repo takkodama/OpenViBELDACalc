@@ -22,9 +22,5 @@ for i = 1:length(Electrodes) %for 1-16Chs
     end
 end
 
-%Check how many data acquired
-whos AllTargetData_Filtered_P300_DownSampled_64Hz
-whos AllNonTargetData_Filtered_P300_DownSampled_64Hz
-
 
 end

@@ -1,4 +1,4 @@
-function [ProbSSVEP_2cls] = LDAcalcmain_SSVEP(directory_Training, directory_Trial)
+function [ProbSSVEP_2cls, ProbSSVEP_4cls] = LDAcalcmain_SSVEP(directory_Training, directory_Trial)
 
 %Training Files
 [Target1] = fileProcessor_dir(directory_Training, dir(['./', directory_Training, horzcat('/[4] SSVEP-classifierInput_Target1*.csv')]));
@@ -27,8 +27,17 @@ function [ProbSSVEP_2cls] = LDAcalcmain_SSVEP(directory_Training, directory_Tria
 [z_B4, d_B4, p_targetB4, b_coef_B4] = LDAfuncex_SSVEP(vertcat(Target2, Target4), vertcat(NonTarget2, NonTarget4), Freq4);
 
 ProbSSVEP_4cls = horzcat(p_target1(:,2), p_target2(:,2), p_target3(:,2), p_target4(:,2));
+ProbP300_4cls
+
+%____________|_ Probability 1 _|_ Probability 2 _|_ Probability 3 _|_ Probability 4 _
+% Duration 1 | Correct         | Wrong           | Wrong           | Wrong           
+% Duration 2 | Wrong           | Correct         | Wrong           | Wrong           
+% Duration 3 | Wrong           | Wrong           | Correct         | Wrong           
+% Duration 4 | Wrong           | Wrong           | Wrong           | Correct        
+
 ProbSSVEP_2cls = horzcat((p_targetA1(:,2)+p_targetA3(:,2))/2,(p_targetB2(:,2)+p_targetB4(:,2))/2,...
                        (p_targetA1(:,2)+p_targetA3(:,2))/2,(p_targetB2(:,2)+p_targetB4(:,2))/2);
+ProbP300_2cls
 
 %____________|_ Probability A _|_ Probability B _|
 % Duration 1 | Correct         | Wrong
@@ -51,7 +60,7 @@ title(graph(2), 'Discriminant Score Duration 2')
 title(graph(3), 'Discriminant Score Duration 3')
 title(graph(4), 'Discriminant Score Duration 4')
 
-filename_Prob = strcat(directory_Trial, '/_ResultSSVEPProb.png');
+filename_Prob = strcat(directory_Trial, '/_ResultSSVEPProb(LDA).png');
 set(gcf,'Position', [0 0 1920 1080], 'PaperPositionMode', 'auto')
 print(filename_Prob,'-dpng','-r0')
 
