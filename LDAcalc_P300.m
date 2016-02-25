@@ -1,4 +1,4 @@
-function [ProbP300_2cls, ProbP300_4cls] = LDAcalcmain_P300(directory_Training, directory_Trial)
+function [ProbP300_2cls, ProbP300_4cls] = LDAcalc_P300(directory_Training, directory_Trial)
 
 % === % === T r a i n i n g % === % ===
 %Feature generation by signal file
@@ -122,26 +122,6 @@ ProbP300_2cls
 % Duration 2 | Correct         | Wrong
 % Duration 3 | Wrong           | Correct
 % Duration 4 | Wrong           | Correct
-
-
-figure
-for i = 1:4
-    ProbAll = vertcat(ProbP300_4cls(i,:), ProbP300_2cls(i,:));
-    
-    graph(i) = subplot(2,2,i);
-    DepictMatrix(ProbAll, {'Target1','Target2','Target3','Target4'}, ...
-        {'P300Prob-4cls', 'P300Prob-2cls'})
-end
-
-title(graph(1), 'Discriminant Score Duration 1')
-title(graph(2), 'Discriminant Score Duration 2')
-title(graph(3), 'Discriminant Score Duration 3')
-title(graph(4), 'Discriminant Score Duration 4')
-
-filename_Prob = strcat(directory_Trial, '/_ResultP300Prob(LDA).png');
-set(gcf,'Position', [0 0 1920 1080], 'PaperPositionMode', 'auto')
-print(filename_Prob,'-dpng','-r0')
-
 end
 
 function [AllData, Sampling_Hz] = fileProcessor_dir(directory, File_dir_struct)

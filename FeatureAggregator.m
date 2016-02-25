@@ -8,7 +8,6 @@ end
 StimulationTimes = SigLen / Duration_point; %10
 Dimentions = Duration_point;
 
-k=1;
 FeatureArray = [];
 for k=1:StimulationTimes
     for j=1:ChNum
