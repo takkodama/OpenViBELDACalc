@@ -7,4 +7,5 @@ demo.m
 lda_train.m
 lda_predict.m
 cov_shrink.m
-Script.m
+Script*.m
+/old
