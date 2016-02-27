@@ -32,7 +32,7 @@ function main_LDAcalc(directory_Training, directory_Trial, savePNG, identifier)
 % :-:-:-:-: (C) Takumi Kodama, University of Tsukuba, Japan :-:-:-:-:
 
 if(identifier == 1), [ProbSSVEP_2cls, ProbSSVEP_4cls] = LDAcalc_SSVEP(directory_Training, directory_Trial);
-elseif(identifier == 2), [ProbP300_2cls, ProbP300_4cls] = LDAcalc_P300(directory_Training, directory_Trial);end
+elseif(identifier == 2), [ProbP300_2cls, ProbP300_4cls] = LDAcalc_P300(directory_Training, directory_Trial); end
 
 figure
 for i = 1:4
@@ -49,7 +49,7 @@ for i = 1:4
 end
 
 if(savePNG == 1)
-    if(identifier == 1), filename_Prob = strcat(directory_Trial, '/_ResultP300Prob(SSVEP).png');
+    if(identifier == 1), filename_Prob = strcat(directory_Trial, '/_ResultSSVEPProb(LDA).png');
     elseif(identifier == 2), filename_Prob = strcat(directory_Trial, '/_ResultP300Prob(LDA).png');end
     set(gcf,'Position', [0 0 1920 1080], 'PaperPositionMode', 'auto')
     print(filename_Prob,'-dpng','-r0')
